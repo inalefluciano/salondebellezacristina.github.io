@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cristina Salón de Belleza | Río Gallegos</title>
+<meta name="description" content="Peluquería, coloración, peinados, uñas y tratamientos en Río Gallegos. Reservá tu turno por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ====== COLORES (cambiá acá y se actualiza toda la página) ====== */
+  :root {
+    --rosa: #c95b73;        /* botones y acentos */
+    --ciruela: #4a1f2e;     /* textos principales */
+    --suave: #7d5a65;       /* textos secundarios */
+    --tarjeta: #fff8f9;     /* fondo de las tarjetas */
+    --borde: #f0d6db;
+    --verde: #128c4a;       /* botón de WhatsApp */
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #ecd0d6;
+    color: var(--ciruela);
+    font-family: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.45;
+  }
+  .app {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: linear-gradient(#fcf0f2, #f5dde1);
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+  }
+  h2 { font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; margin: 0; }
+  a { color: inherit; }
+
+  /* ====== ENCABEZADO ====== */
+  header { display: flex; align-items: center; justify-content: space-between; padding: calc(14px + env(safe-area-inset-top, 0px)) 20px 14px; position: relative; }
+  .logo { text-align: center; flex: 1; text-decoration: none; }
+  .logo b { display: block; font-family: "Great Vibes", cursive; font-weight: 400; font-size: 2.6rem; line-height: 1; color: #7a2e45; }
+  .logo small { letter-spacing: .22em; font-size: .62rem; font-weight: 700; color: var(--suave); }
+  details.menu { position: absolute; right: 16px; top: calc(22px + env(safe-area-inset-top, 0px)); z-index: 5; }
+  details.menu summary { list-style: none; cursor: pointer; font-size: 1.8rem; line-height: 1; }
+  details.menu summary::-webkit-details-marker { display: none; }
+  details.menu nav { position: absolute; right: 0; margin-top: 8px; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; padding: 8px; box-shadow: 0 10px 24px rgba(74,31,46,.15); min-width: 170px; }
+  details.menu nav a { display: block; padding: 10px 14px; text-decoration: none; font-weight: 600; border-radius: 8px; }
+  details.menu nav a:hover { background: #f8e3e7; }
+
+  /* ====== ÍCONOS DE LÍNEA ====== */
+  .ic { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.2em; }
+  .cat i, .cat-top i { color: #a8435b; }
+  .cat i .ic, .cat-top i .ic { width: 26px; height: 26px; }
+  .info h3 .ic { color: var(--rosa); }
+  details.menu summary .ic { width: 1.8rem; height: 1.8rem; vertical-align: top; }
+
+  /* ====== FOTOS (si falta la imagen, se ve un degradado rosa) ====== */
+  .foto { background: var(--img) center / cover no-repeat, linear-gradient(135deg, #ebbfc9, #d49aaa); }
+
+  /* ====== PORTADA ====== */
+  .hero {
+    min-height: 440px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 28px 24px 64px;
+    color: #fff;
+    border-radius: 0 0 50% 50% / 0 0 34px 34px;
+    background:
+      linear-gradient(180deg, rgba(40,15,25,.05), rgba(40,15,25,.65)),
+      var(--img) center / cover no-repeat,
+      linear-gradient(135deg, #c98a99, #8d4a5c);
+  }
+  .hero h1 { font-family: "Playfair Display", Georgia, serif; font-size: 2.3rem; line-height: 1.1; margin: 0 0 8px; max-width: 12ch; }
+  .hero p { margin: 0 0 22px; font-size: 1.1rem; max-width: 20ch; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--rosa); color: #fff; text-decoration: none; font-weight: 700; font-size: 1.05rem; padding: 15px 26px; border-radius: 999px; align-self: flex-start; box-shadow: 0 8px 18px rgba(150,40,70,.3); }
+
+  section { padding: 26px 0 0; }
+  .titulo { display: flex; justify-content: space-between; align-items: baseline; padding: 0 20px 14px; }
+  .titulo a { font-size: .9rem; font-weight: 700; text-decoration: none; color: var(--rosa); }
+
+  /* ====== CARRUSELES (se deslizan con el dedo) ====== */
+  .carrusel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 20px 6px; scrollbar-width: none; }
+  .carrusel::-webkit-scrollbar { display: none; }
+  .carrusel > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+  /* Categorías */
+  .cat { display: flex; justify-content: space-between; gap: 10px; padding: 24px 16px 0; }
+  .cat a { flex: 1; text-align: center; text-decoration: none; font-size: .78rem; font-weight: 700; }
+  .cat i { display: grid; place-items: center; width: 100%; max-width: 62px; aspect-ratio: 1; margin: 0 auto 6px; border-radius: 50%; background: #f8dde2; font-style: normal; font-size: 1.5rem; }
+
+  /* Servicios */
+  .serv { width: 140px; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; overflow: hidden; text-align: center; padding-bottom: 12px; }
+  .serv .foto { height: 150px; margin-bottom: 10px; }
+  .serv b { display: block; font-family: "Playfair Display", Georgia, serif; font-size: .98rem; padding: 0 8px; }
+  .serv span { font-size: .8rem; color: var(--suave); padding: 0 8px; display: block; }
+
+  /* Catálogo */
+  .cat-card { margin: 0 20px 14px; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; padding: 16px; }
+  .cat-top { display: flex; align-items: center; gap: 12px; }
+  .cat-top i { flex: 0 0 auto; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #f8dde2; font-style: normal; font-size: 1.4rem; }
+  .cat-card h3 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 1.2rem; }
+  .cat-card small { color: var(--suave); }
+  .cat-card ul { list-style: none; margin: 10px 0 0; padding: 0; }
+  .cat-card li { padding: 9px 0; border-bottom: 1px solid var(--borde); font-size: .95rem; }
+  .cat-card li:last-child { border-bottom: 0; }
+  .cta { margin: 6px 20px 0; padding: 24px 18px; border-radius: 14px; background: #f6d9df; text-align: center; }
+  .cta h3 { margin: 0 0 4px; font-family: "Playfair Display", Georgia, serif; font-size: 1.25rem; }
+  .cta p { margin: 0 0 16px; color: var(--suave); }
+  .cta .tel { display: block; margin-top: 14px; font-weight: 700; text-decoration: none; }
+  .cta .btn { background: var(--verde); }
+
+  /* Galería */
+  .gal { width: 62%; aspect-ratio: 3 / 4; border-radius: 16px; }
+
+  /* Opiniones */
+  .op { width: 82%; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; padding: 16px; }
+  .op .est { color: #e8a317; letter-spacing: 2px; }
+  .op p { margin: 6px 0; font-size: .95rem; }
+  .op .quien { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: .9rem; }
+  .op .quien i { width: 36px; height: 36px; border-radius: 50%; background: #f1c4cd; display: grid; place-items: center; font-style: normal; }
+
+  /* Dejar reseña en Google */
+  .resena { margin: 16px 20px 0; padding: 22px 18px; text-align: center; background: var(--tarjeta); border: 1px dashed var(--rosa); border-radius: 14px; }
+  .resena .est { color: #e8a317; letter-spacing: 3px; font-size: 1.3rem; }
+  .resena h3 { margin: 4px 0; font-family: "Playfair Display", Georgia, serif; font-size: 1.2rem; }
+  .resena p { margin: 0 0 16px; font-size: .92rem; color: var(--suave); }
+
+  /* Redes */
+  .redes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 20px; }
+  .redes a { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; padding: 14px 6px; text-align: center; text-decoration: none; font-weight: 700; font-size: .9rem; }
+  .redes small { display: block; font-weight: 400; color: var(--suave); font-size: .72rem; overflow-wrap: anywhere; }
+  .redes i { display: grid; place-items: center; height: 32px; margin: 0 auto 6px; color: var(--ciruela); font-style: normal; }
+  .redes .ic { width: 28px; height: 28px; }
+
+  /* Ubicación y horarios */
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0 20px; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px; padding: 16px; font-size: .9rem; }
+  .info h3 { margin: 0 0 4px; font-size: 1rem; }
+  .info a { color: var(--rosa); font-weight: 700; text-decoration: none; }
+
+  /* Pie */
+  .gracias { margin: 28px 20px 0; text-align: center; padding: 26px 12px; border-radius: 14px; background: #f6d9df; font-family: "Great Vibes", cursive; font-size: 1.9rem; line-height: 1.15; color: #7a2e45; }
+  footer { text-align: center; font-size: .78rem; color: var(--suave); padding: 14px 20px 0; }
+
+  /* Botón flotante */
+  .flota { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 10; background: var(--verde); color: #fff; text-decoration: none; font-weight: 700; padding: 14px 28px; border-radius: 999px; box-shadow: 0 8px 20px rgba(0,0,0,.25); white-space: nowrap; }
+  .btn:focus-visible, .flota:focus-visible, a:focus-visible { outline: 3px solid var(--ciruela); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-tijera" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.8"/><circle cx="6" cy="18" r="2.8"/><path d="M8.2 7.8 20 18M8.2 16.2 20 6"/></symbol>
+  <symbol id="i-pincel" viewBox="0 0 24 24"><path d="M20 4 11.5 12.5"/><path d="M11.5 12.5c-2.5-.5-4.7 1-4.7 3.5 0 1.3-.7 2.5-2 3 2.5 1 6.5.5 7.8-2 .8-1.5.3-3.8-1.1-4.5z"/></symbol>
+  <symbol id="i-destello" viewBox="0 0 24 24"><path d="M12 3c.6 4.2 2.8 6.4 9 9-6.2 2.6-8.4 4.8-9 9-.6-4.2-2.8-6.4-9-9 6.2-2.6 8.4-4.8 9-9z"/></symbol>
+  <symbol id="i-esmalte" viewBox="0 0 24 24"><rect x="7" y="11" width="10" height="10" rx="2.5"/><path d="M10 11V8h4v3M11 8V3h2v5"/></symbol>
+  <symbol id="i-hoja" viewBox="0 0 24 24"><path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14z"/><path d="M5 19 14 10"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 21v-8h2.6l.4-3.2H14V7.9c0-.9.3-1.5 1.6-1.5H17V3.5c-.3 0-1.2-.1-2.2-.1C12.6 3.4 11 4.7 11 7.2v2.6H8.4V13H11v8z"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2 4.2 5 4.5"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M4 20l1.3-4.2A8.5 8.5 0 1 1 8.3 18.8z"/><path d="M9 8.8c0 3 2.6 5.8 5.8 6l1.3-1.3-2-1-1 .8c-1-.4-1.8-1.2-2.2-2.2l.8-1-1-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</defs></svg>
+<div class="app">
+
+  <header>
+    <a class="logo" href="#inicio"><b>Cristina</b><small>SALÓN DE BELLEZA</small></a>
+    <details class="menu">
+      <summary aria-label="Abrir menú"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></summary>
+      <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#galeria">Galería</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </details>
+  </header>
+
+  <!-- 1. PORTADA · foto: imagenes/portada.jpg -->
+  <div class="hero" id="inicio" style="--img: url('C:\Users\NITRO\OneDrive\Documentos\Personal\Clientes paginas web\Salon de belleza Cristina\Web\imagenes\portada.jpg')">
+    <h1>Tu belleza, nuestra pasión</h1>
+    <p>Cuidamos de vos en cada detalle</p>
+    <a class="btn" href="https://wa.me/5492966627815?text=Hola%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"/></svg> Reservar turno</a>
+  </div>
+
+  <!-- 2. CATEGORÍAS -->
+  <nav class="cat" aria-label="Categorías">
+    <a href="#cortes"><i><svg class="ic" aria-hidden="true"><use href="#i-tijera"/></svg></i>Cortes</a>
+    <a href="#coloracion"><i><svg class="ic" aria-hidden="true"><use href="#i-pincel"/></svg></i>Coloración</a>
+    <a href="#depilacion"><i><svg class="ic" aria-hidden="true"><use href="#i-destello"/></svg></i>Depilación</a>
+    <a href="#unas"><i><svg class="ic" aria-hidden="true"><use href="#i-esmalte"/></svg></i>Uñas</a>
+    <a href="#tratamientos"><i><svg class="ic" aria-hidden="true"><use href="#i-hoja"/></svg></i>Tratamientos</a>
+  </nav>
+
+  <!-- 3. SERVICIOS · fotos: cabello.jpg, coloracion.jpg, peinados.jpg, unas.jpg -->
+  <section id="servicios">
+    <div class="titulo"><h2>Servicios destacados</h2><a href="#catalogo">Ver todos →</a></div>
+    <div class="carrusel">
+      <div class="serv"><div class="foto" style="--img: url('imagenes/cabello.jpg')"></div><b>Corte y brushing</b><span>Estilo que resalta tu belleza</span></div>
+      <div class="serv"><div class="foto" style="--img: url('imagenes/coloracion.jpg')"></div><b>Coloración y mechas</b><span>Luz y color para un nuevo vos</span></div>
+      <div class="serv"><div class="foto" style="--img: url('imagenes/peinados.jpg')"></div><b>Peinados</b><span>Para cada ocasión especial</span></div>
+      <div class="serv"><div class="foto" style="--img: url('imagenes/unas.jpg')"></div><b>Manicura y uñas</b><span>Belleza en tus manos</span></div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE SERVICIOS · para agregar un servicio, copiá una línea <li>...</li> y cambiá el texto -->
+  <section id="catalogo">
+    <div class="titulo"><div><h2>Nuestro catálogo de servicios</h2><small style="color:var(--suave)">Todo lo que necesitás para sentirte bien, en un solo lugar</small></div></div>
+    <div class="cat-card" id="cortes">
+      <div class="cat-top"><i><svg class="ic" aria-hidden="true"><use href="#i-tijera"/></svg></i><div><h3>Cortes</h3><small>Estilo para cada personalidad</small></div></div>
+      <ul>
+        <li>Corte dama con secado</li>
+        <li>Corte dama sin secado</li>
+        <li>Corte niña recto</li>
+        <li>Corte niña con capas</li>
+        <li>Corte caballero</li>
+        <li>Corte niño</li>
+      </ul>
+    </div>
+    <div class="cat-card" id="coloracion">
+      <div class="cat-top"><i><svg class="ic" aria-hidden="true"><use href="#i-pincel"/></svg></i><div><h3>Coloración</h3><small>Luz y color para un nuevo vos</small></div></div>
+      <ul>
+        <li>Tinte simple con secado</li>
+        <li>Tinte simple sin secado</li>
+        <li>Retoque de raíces</li>
+        <li>Decoloración</li>
+        <li>Colores de fantasía</li>
+        <li>Balayage</li>
+        <li>Baño de color</li>
+        <li>Luces</li>
+      </ul>
+    </div>
+    <div class="cat-card" id="depilacion">
+      <div class="cat-top"><i><svg class="ic" aria-hidden="true"><use href="#i-destello"/></svg></i><div><h3>Depilación</h3><small>Piel suave, todos los días</small></div></div>
+      <ul>
+        <li>Pierna completa</li>
+        <li>Media pierna</li>
+        <li>Brazos</li>
+        <li>Axilas</li>
+        <li>Labio</li>
+        <li>Cejas</li>
+      </ul>
+    </div>
+    <div class="cat-card" id="unas">
+      <div class="cat-top"><i><svg class="ic" aria-hidden="true"><use href="#i-esmalte"/></svg></i><div><h3>Uñas</h3><small>Belleza en tus manos y pies</small></div></div>
+      <ul>
+        <li>Manicura completa</li>
+        <li>Pedicura completa</li>
+        <li>Uñas de gel</li>
+        <li>Esmalte semipermanente</li>
+        <li>Cambio de color</li>
+        <li>Retirada de esmalte</li>
+      </ul>
+    </div>
+    <div class="cat-card" id="tratamientos">
+      <div class="cat-top"><i><svg class="ic" aria-hidden="true"><use href="#i-hoja"/></svg></i><div><h3>Tratamientos</h3><small>Cuidado profesional, resultados reales</small></div></div>
+      <ul>
+        <li>Tratamiento de cabello</li>
+        <li>Tratamiento de uñas</li>
+      </ul>
+    </div>
+    <div class="cta">
+      <h3>¿Lista para tu próxima cita?</h3>
+      <p>Contactanos y reservá tu turno</p>
+      <a class="btn" href="https://wa.me/5492966627815?text=Hola%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"/></svg> Reservar por WhatsApp</a>
+      <a class="tel" href="tel:+5492966627815"><svg class="ic" aria-hidden="true"><use href="#i-telefono"/></svg> 2966-627815</a>
+    </div>
+  </section>
+
+  <!-- 4. GALERÍA · fotos: trabajo1.jpg, trabajo2.jpg, trabajo3.jpg -->
+  <section id="galeria">
+    <div class="titulo"><h2>Galería de trabajos</h2><a href="https://instagram.com/bellezacristin1" target="_blank" rel="noopener">Ver más →</a></div>
+    <div class="carrusel">
+      <div class="gal foto" style="--img: url('imagenes/trabajo1.jpg')"></div>
+      <div class="gal foto" style="--img: url('imagenes/trabajo2.jpg')"></div>
+      <div class="gal foto" style="--img: url('imagenes/trabajo3.jpg')"></div>
+    </div>
+  </section>
+
+  <!-- 5. OPINIONES · REEMPLAZÁ estos textos de ejemplo por opiniones reales de tus clientas -->
+  <section id="opiniones">
+    <div class="titulo"><h2>Lo que dicen nuestras clientas</h2></div>
+    <div class="carrusel">
+      <div class="op"><span class="est">★★★★★</span><p>“Corte de pelo y servicio de peluquería y belleza para hombres.”</p><div class="quien"><i>M</i>Marcos herrera</div></div>
+      <div class="op"><span class="est">★★★★★</span><p>“Johny capo cortando. El lugar es muy cálido y tiene olores reconfortantes!!!”</p><div class="quien"><i>A</i>Fabian Santich</div></div>
+    </div>
+  </section>
+
+  <!-- RESEÑA EN GOOGLE · cambiá PEGA_AQUI_TU_PLACE_ID por el código de tu local (o pegá el enlace completo que te da Google) -->
+  <div class="resena">
+    <div class="est">★★★★★</div>
+    <h3>¿Ya te atendiste con nosotras?</h3>
+    <p>Tu opinión nos ayuda a crecer. Dejanos tu reseña en Google, te lleva menos de un minuto.</p>
+    <a class="btn" href="https://search.google.com/local/writereview?placeid=PEGA_AQUI_TU_PLACE_ID" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-lapiz"/></svg> Escribir una reseña</a>
+  </div>
+
+  <!-- 6. REDES -->
+  <section>
+    <div class="redes">
+      <a href="https://instagram.com/bellezacristin1" target="_blank" rel="noopener"><i><svg class="ic" aria-hidden="true"><use href="#i-instagram"/></svg></i>Instagram<small>@bellezacristin1</small></a>
+      <a href="https://facebook.com/cristinaines.aranda" target="_blank" rel="noopener"><i><svg class="ic" aria-hidden="true"><use href="#i-facebook"/></svg></i>Facebook<small>Cristina Ines Aranda</small></a>
+      <a href="https://tiktok.com/@cristinainesaranda" target="_blank" rel="noopener"><i><svg class="ic" aria-hidden="true"><use href="#i-tiktok"/></svg></i>TikTok<small>Cristina Aranda</small></a>
+    </div>
+  </section>
+
+  <!-- 7. UBICACIÓN Y HORARIOS · poné tu dirección real en el enlace de Maps -->
+  <section id="contacto">
+    <div class="info">
+      <div>
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg> Ubicación</h3>
+        Río Gallegos, Santa Cruz<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n+de+belleza+Cristina+R%C3%ADo+Gallegos" target="_blank" rel="noopener">Ver en Google Maps →</a>
+      </div>
+      <div>
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-reloj"/></svg> Horarios</h3>
+        Lunes a Viernes<br>09:00 - 19:00<br>Sábados<br>09:00 - 14:00
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PIE DE PÁGINA -->
+  <div class="gracias">Gracias por ser parte de esta historia ♡</div>
+  <footer>© 2026 Salón de Belleza Cristina</footer>
+
+</div>
+
+<!-- 9. BOTÓN FLOTANTE -->
+<a class="flota" href="https://wa.me/5492966627815?text=Hola%2C%20quiero%20reservar%20un%20turno" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"/></svg> Reservar turno</a>
+</body>
+</html>
